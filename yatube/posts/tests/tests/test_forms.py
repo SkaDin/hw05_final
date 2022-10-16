@@ -122,7 +122,7 @@ class PostPagesTests(TestCase):
     def tearDownClass(cls):
         super().tearDownClass()
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
-        
+   
     def setUp(self):
         self.guest_client = Client()
 
@@ -133,7 +133,6 @@ class PostPagesTests(TestCase):
         )
         obj = response.context["page_obj"][0]
         self.assertEqual(obj.image, self.post.image)
-
 
     def test_image_in_index_and_profile_page(self):
         """Картинка передается на страницу index_and_profile."""
@@ -146,7 +145,6 @@ class PostPagesTests(TestCase):
                 response = self.guest_client.get(url)
                 obj = response.context["page_obj"][0]
                 self.assertEqual(obj.image, self.post.image)
-
 
     def test_image_in_post_detail_page(self):
         """Картинка передается на страницу post_detail."""
