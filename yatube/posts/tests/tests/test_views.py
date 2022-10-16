@@ -150,16 +150,23 @@ class PostPagesTests(TestCase):
             follow=True,
         )
         self.assertRedirects(
-            response, reverse('posts:post_detail', kwargs={'post_id': self.post.id})
+            response, reverse('posts:post_detail',
+            kwargs={'post_id': self.post.id})
         )
-        self.assertEqual(Comment.objects.count(), comments_count + settings.NUMBER_ONE)
-        self.assertTrue(Comment.objects.filter(text='Тестовый комментарий').exists())
+        self.assertEqual(Comment.objects.count(),
+        comments_count + settings.NUMBER_ONE
+        )
+        self.assertTrue(Comment.objects.filter(
+            text='Тестовый комментарий').
+            exists()
+        )
+
 
     def test_check_cache(self):
         """Проверка кеша"""
         response_one = self.guest_client.get(reverse('posts:index'))
         result_one = response_one.content
-        Post.objects.get(id= settings.NUMBER_ONE).delete()
+        Post.objects.get(id=settings.NUMBER_ONE).delete()
         response_two = self.guest_client.get(reverse('posts:index'))
         result_two = response_two.content
         self.assertEqual(result_one, result_two)
@@ -174,11 +181,13 @@ class PostPagesTests(TestCase):
         response = self.authorized_client.get(reverse('posts:follow_index'))
         self.assertEqual(len(response.context['page_obj']), settings.NUMBER_ONE)
 
+
     def test_unfollow(self):
         """Проверка отписки от автора поста"""
         Follow.objects.all().delete()
         response = self.authorized_client.get(reverse('posts:follow_index'))
         self.assertEqual(len(response.context['page_obj']), settings.NUMBER_INDEX)
+
 
     def test_checking_post_did_not_appear(self):
         """Проверка что пост не появился в избранных у обычного пользователя"""

@@ -50,6 +50,7 @@ class Post(models.Model):
     class Meta:
         ordering = ['-pub_date']
 
+
 class Comment(models.Model):
     post = models.ForeignKey(
         Post,
@@ -71,7 +72,7 @@ class Comment(models.Model):
         'Дата публикации',
         auto_now_add=True
     )
-    
+
     def __str__(self):
         return self.text
 
@@ -82,11 +83,11 @@ class Comment(models.Model):
 class Follow(models.Model):
     user = models.ForeignKey(
         User,
-        on_delete = None,
-        related_name = 'follower'
+        on_delete=None,
+        related_name='follower'
     )
     author = models.ForeignKey(
         User,
-        on_delete = models.CASCADE,
-        related_name = 'following'
+        on_delete=models.CASCADE,
+        related_name='following'
     )

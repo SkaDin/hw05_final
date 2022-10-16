@@ -85,6 +85,7 @@ class PostFormTests(TestCase):
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
+
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostPagesTests(TestCase):
     @classmethod
@@ -115,6 +116,8 @@ class PostPagesTests(TestCase):
             group=cls.group,
             image=cls.uploaded
         )
+
+
     @classmethod
     def tearDownClass(cls):
         super().tearDownClass()
@@ -156,5 +159,6 @@ class PostPagesTests(TestCase):
     def test_image_in_page(self):
         """Проверяем что пост с картинкой создается в БД"""
         self.assertTrue(
-            Post.objects.filter(text="Тестовый текст", image="posts/small.gif").exists()
+            Post.objects.filter(text="Тестовый текст",
+            image="posts/small.gif").exists()
         )
