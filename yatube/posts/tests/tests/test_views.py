@@ -158,7 +158,7 @@ class PostPagesTests(TestCase):
             reverse('posts:post_detail',
                     kwargs={'post_id': self.post.id}))
         self.assertEqual(Comment.objects.count(),
-                        comments_count + settings.NUMBER_ONE)
+                         comments_count + settings.NUMBER_ONE)
         self.assertTrue(Comment.objects.filter(
                         text='Тестовый комментарий').exists())
 
@@ -179,14 +179,14 @@ class PostPagesTests(TestCase):
         )
         response = self.authorized_client.get(reverse('posts:follow_index'))
         self.assertEqual(len(response.context['page_obj']),
-                            settings.NUMBER_ONE)
+                         settings.NUMBER_ONE)
 
     def test_unfollow(self):
         """Проверка отписки от автора поста"""
         Follow.objects.all().delete()
         response = self.authorized_client.get(reverse('posts:follow_index'))
         self.assertEqual(len(response.context['page_obj']),
-                            settings.NUMBER_INDEX)
+                         settings.NUMBER_INDEX)
 
     def test_checking_post_did_not_appear(self):
         """Проверка что пост не появился в избранных у обычного пользователя"""
