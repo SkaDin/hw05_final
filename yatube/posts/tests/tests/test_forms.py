@@ -117,12 +117,11 @@ class PostPagesTests(TestCase):
             image=cls.uploaded
         )
 
-
     @classmethod
     def tearDownClass(cls):
         super().tearDownClass()
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
-   
+
     def setUp(self):
         self.guest_client = Client()
 
@@ -158,5 +157,4 @@ class PostPagesTests(TestCase):
         """Проверяем что пост с картинкой создается в БД"""
         self.assertTrue(
             Post.objects.filter(text="Тестовый текст",
-            image="posts/small.gif").exists()
-        )
+            image="posts/small.gif").exists())
