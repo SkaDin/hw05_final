@@ -154,9 +154,9 @@ class PostPagesTests(TestCase):
             reverse('posts:post_detail',
             kwargs={'post_id': self.post.id}))
         self.assertEqual(Comment.objects.count(),
-                        comments_count + settings.NUMBER_ONE)
+                            comments_count + settings.NUMBER_ONE)
         self.assertTrue(Comment.objects.filter(
-                        text='Тестовый комментарий').exists())
+                            text='Тестовый комментарий').exists())
 
     def test_check_cache(self):
         """Проверка кеша"""
