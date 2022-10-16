@@ -38,6 +38,10 @@ class PostPagesTests(TestCase):
             ): 'posts/create_post.html',
             reverse('posts:post_create'): 'posts/create_post.html',
         }
+        cls.comment = Comment.objects.create(
+            author=cls.user,
+            text="Тестовый комментарий",
+        )
 
     def setUp(self):
         self.guest_client = Client()
@@ -182,7 +186,7 @@ class PostPagesTests(TestCase):
         Follow.objects.all().delete()
         response = self.authorized_client.get(reverse('posts:follow_index'))
         self.assertEqual(len(response.context['page_obj']),
-                            settings.NUMBER_INDEX)
+                                settings.NUMBER_INDEX)
 
     def test_checking_post_did_not_appear(self):
         """Проверка что пост не появился в избранных у обычного пользователя"""
