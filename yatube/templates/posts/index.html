@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Главная страница Yatube{% endblock %}
+{% block content %}
+{% include 'posts/includes/switcher.html' %}
+  <div class="container py-5">
+    {% load cache %}
+    {% cache 20 index_page %}  
+    <h1>Последние обновления на сайте</h1>
+    {% for post in page_obj %}
+          {% include 'includes/cart.html' %}   
+    {% if post.group %}   
+      <a class="btn btn-primary" href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+    {% endif %} 
+    {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+  </div>
+  {% include 'posts/includes/paginator.html' %}
+  {% endcache %}
+{% endblock %}
