@@ -155,6 +155,5 @@ class PostPagesTests(TestCase):
 
     def test_image_in_page(self):
         """Проверяем что пост с картинкой создается в БД"""
-        self.assertTrue(
-            Post.objects.filter(text="Тестовый текст",
-            image="posts/small.gif").exists())
+        self.assertTrue(Post.objects.filter(text="Тестовый текст",
+                        image="posts/small.gif").exists())
