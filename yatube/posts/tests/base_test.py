@@ -8,7 +8,9 @@ from django.test import Client, TestCase, override_settings
 
 from ..models import Post, Group, User
 
+
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
+
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostBaseTestCase(TestCase):

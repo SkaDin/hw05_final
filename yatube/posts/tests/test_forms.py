@@ -37,7 +37,10 @@ class PostFormTests(PostBaseTestCase):
             description='Тестовое описание',
         )
         posts_count = Post.objects.count()
-        form_data = {'text': 'Изменяем текст', 'group': self.group.id,}
+        form_data = {
+            'text': 'Изменяем текст',
+            'group': self.group.id,
+            }
         response = self.authorized_client.post(
             reverse('posts:post_edit', args=({self.post.id})),
             data=form_data,
@@ -65,7 +68,6 @@ class PostFormTests(PostBaseTestCase):
         error = ('Отправленный файл пуст.')
         self.assertFormError(response, 'form', 'image', error)
 
-
     def test_post_edit_not_create_guest_client(self):
         """Валидная форма не изменит запись в Post если неавторизован."""
         self.post = Post.objects.create(
@@ -89,7 +91,6 @@ class PostFormTests(PostBaseTestCase):
         self.assertEqual(Post.objects.count(), posts_count)
         self.assertFalse(Post.objects.filter(text='Изменяем текст').exists())
         self.assertEqual(response.status_code, HTTPStatus.OK)
-
 
 
 class PostPagesTests(PostBaseTestCase):
