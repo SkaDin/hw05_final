@@ -24,7 +24,7 @@ class PostFormTests(PostBaseTestCase):
         self.assertEqual(
             Post.objects.count(),
             posts_count + settings.NUMBER_ONE
-            )
+        )
         self.assertTrue(Post.objects.filter(text='Тестовый текст').exists())
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
@@ -40,7 +40,7 @@ class PostFormTests(PostBaseTestCase):
             description='Тестовое описание',
         )
         posts_count = Post.objects.count()
-        form_data = {'text': 'Изменяем текст','group': self.group.id}
+        form_data = {'text': 'Изменяем текст', 'group': self.group.id}
         response = self.authorized_client.post(
             reverse('posts:post_edit', args=({self.post.id})),
             data=form_data,
