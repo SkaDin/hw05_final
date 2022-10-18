@@ -33,14 +33,12 @@ def group_posts(request, slug):
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     posts = user.posts.all()
-    post_count = posts.count()
     paginator = Paginator(posts, settings.POST_LIMIT)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     following = user.following.exists()
     context = {
         'author': user,
-        'posts_count': post_count,
         'page_obj': page_obj,
         'following': following
     }
@@ -132,5 +130,5 @@ def profile_follow(request, username):
 @login_required
 def profile_unfollow(request, username):
     author = get_object_or_404(User, username=username)
-    Follow.objects.get(user=request.user, author=author).delete()
+    Follow.objects.filter(user=request.user, author=author).delete()
     return redirect('posts:follow_index')

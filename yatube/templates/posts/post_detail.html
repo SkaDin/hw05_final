@@ -8,14 +8,15 @@
         <li class="list-group-item">
           Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
+      </ul>
 {% if post.group %}
   <li class="list-group-item">
     Группа: {{post.group.slug}}
     <div class="post__link">
       <a href="{% url 'posts:group_list' post.group.slug %}" >все записи группы: {{post.group.slug}}</a>
-      </div>
+    </div>
+  </li>
 {% endif %} 
-        </li>
 <li class="list-group-item">
   Автор: {{ post.author.get_full_name }} 
 </li>
@@ -24,7 +25,6 @@
   </li>
 <li class="list-group-item">
   <a href="{% url 'posts:profile' post.author.username %}">Все посты пользователя</a>
-  </a>
 </li>
 </ul>
 </aside>
