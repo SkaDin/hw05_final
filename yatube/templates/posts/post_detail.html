@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+
+{% load static %} 
 {% load thumbnail %}
 {% block title %}Пост {{ post.text|truncatechars:30 }}{% endblock %}
 {% block content %}
-<div class="row">
+<div class="container">
+  <div class="element-1">
   <aside class="col-12 col-md-3">
+    <font color=black>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           Дата публикации: {{ post.pub_date|date:"d E Y" }}
@@ -25,18 +29,25 @@
   </li>
 <li class="list-group-item">
   <a href="{% url 'posts:profile' post.author.username %}">Все посты пользователя</a>
+</div>
 </li>
 </ul>
 </aside>
-<article class="col-12 col-md-9">
-  {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
-    <img class="card-img my-2" src="{{ im.url }}">
-  {% endthumbnail %}
+
+<div class="element-2" style="position: relative; top: -220px; left: 350px; ">
+  {% thumbnail post.image "1150x680" crop="center"  as im %}
+<img src="{{ im.url }}"  class="image-radius"/>
+{% endthumbnail %}
   <p>
-    {{ post.text }}
+    <font color=white>
+    {{ post.text|linebreaksbr }}
+    </font>
   </p>
-  <a class="btn btn-primary" href="{% url 'posts:post_edit' post.id %}" role="button">Редактировать</a>
+  <a href="{% url 'posts:post_edit' post.id %}" class="button19">Редактировать</a>
+</div>
+<div class="element-3" style="position: relative;">
   {% include 'includes/comment.html' %}
-</article>
+</font>
+</div>
 </div>
 {% endblock %}

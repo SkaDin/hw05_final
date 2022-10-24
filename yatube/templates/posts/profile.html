@@ -1,26 +1,18 @@
 {% extends 'base.html' %}
+{% load static %} 
+{% load thumbnail %}
 {% block title %}Профайл пользователя {{ author.get_full_name }}{% endblock %}
 {% block content %}
 <div class="container py-5">
   <div class="mb-5">
     {% if author != request.user %}
     {% if following %}
-      <a
-        class="btn btn-lg btn-primary"
-        href="{% url 'posts:profile_unfollow' author.username %}"
-        role="button"
-      >
-        Отписаться
-      </a>
+      <a href="{% url 'posts:profile_unfollow' author.username %}"class="button19">Отписаться</a>
     {% else %}
-      <a
-        class="btn btn-lg btn-primary"
-        href="{% url 'posts:profile_follow' author.username %}" role="button"
-      >
-        Подписаться
-      </a>
+      <a href="{% url 'posts:profile_follow' author.username %}" class="button19">Подписаться</a>
     {% endif %}
     {% endif %}
+  
   </div>
   <h1>Все посты пользователя: {{ author.get_full_name }} </h1>
     <h3>Всего постов: {{ author.posts.count }} </h3>
@@ -28,10 +20,9 @@
 {% for post in page_obj %}
   {% include 'includes/cart.html' %}
     {% if post.group %}
-      <a class="btn btn-primary" href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-      <br>
-      </br>
-      <a class="btn btn-primary" href="{% url 'posts:post_detail' post.id %}">подробная информация</a>
+      <a href="{% url 'posts:group_list' post.group.slug %}"class="button19">все записи группы</a>
+    
+      <a href="{% url 'posts:post_detail' post.id %}"class="button19">подробная информация</a>
 {% endif %}
 {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}

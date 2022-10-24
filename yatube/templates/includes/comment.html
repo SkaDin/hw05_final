@@ -1,20 +1,5 @@
 {% load user_filters %}
-
 {% if user.is_authenticated %}
-  <div class="card my-4">
-    <h5 class="card-header"><font color="black">Добавить комментарий:</h5></font>
-    <div class="card-body">
-      <form method="post" action="{% url 'posts:add_comment' post.id %}">
-        {% csrf_token %}      
-        <div class="form-group mb-2">
-          {{ form.text|addclass:"form-control" }}
-        </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
-      </form>
-    </div>
-  </div>
-{% endif %}
-
 {% for comment in comments %}
   <div class="media mb-4">
     <div class="media-body">
@@ -24,8 +9,24 @@
         </a>
       </h5>
       <p>
-        {{ comment.text }}
+        <font color=white>
+        {{ comment.text|linebreaksbr }}
+        </font>
       </p>
     </div>
   </div>
 {% endfor %} 
+  <div class="card my-3">
+    <h5 class="card-header"><font color="black">Добавить комментарий:</h5>
+    <div class="card-body">
+      <form method="post" action="{% url 'posts:add_comment' post.id %}">
+        {% csrf_token %}      
+        <div class="form-group mb-2">
+          {{ form.text|addclass:"form-control" }}
+        </font>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+      </form>
+    </div>
+  </div>
+{% endif %}

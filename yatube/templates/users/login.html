@@ -4,6 +4,7 @@
 {% load user_filters %}
   <div class="row justify-content-center">
     <div class="col-md-8 p-5">
+      <font color=black>
       <div class="card">
         <div class="card-header">
           Войти на сайт
@@ -59,15 +60,14 @@
             <button type="submit" class="btn btn-primary">
               Войти
             </button>
-            <!-- Тест на внимательность. Без переопределения шаблона этого адреса
-            не существует. Нужно что-то делать, иначе все упадет -->
             <a href="{% url 'users:password_reset_form' %}" class="btn btn-link">
               Забыли пароль?
             </a>
+          </font>
           </div>
           </form>
-        </div> <!-- card body -->
-      </div> <!-- card -->
-    </div> <!-- col -->
-</div> <!-- row -->
+        </div> 
+      </div> 
+    </div> 
+</div> 
 {% endblock %} 
