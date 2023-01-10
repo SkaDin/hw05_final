@@ -6,6 +6,8 @@ from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
 
 
+
+
 def index(request):
     posts = Post.objects.all()
     paginator = Paginator(posts, settings.POST_LIMIT)
